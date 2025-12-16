@@ -1,0 +1,14 @@
+body { text-align:center; background:#c8a36a; }
+.tabuleiro {
+  display:grid;
+  grid-template-columns: repeat(3,80px);
+  gap:5px;
+  justify-content:center;
+}
+.casa {
+  width:80px;
+  height:80px;
+  font-size:40px;
+  background:#fff;
+  cursor:pointer;
+}

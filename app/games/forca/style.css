@@ -1,0 +1,234 @@
+:root {
+    --corDarkBlue300:#0A3871; /* azul dos botoes e letras*/
+
+    --corLightBlue100:#E5E5E5; /* cor do background */
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: var(--corLightBlue100);
+}
+
+header > h1 {
+    margin-top: 40px;
+}
+
+#adicionar-area, #adicionar-area-dica {
+    display: block;
+    margin: auto;
+    outline: none;
+    resize: none;
+    border: none;
+    width: 536px;
+    height: 100px;
+    font-size: 32px;
+    background-color: var(--corLightBlue100);
+    color: var(--corDarkBlue300);
+}
+#adicionar-area-dica {
+    margin-top: 10px;
+}
+
+textarea::placeholder {
+    color: var(--corDarkBlue300);
+}
+
+#tela-opcoes {
+    display: block;
+}
+
+#botoes-iniciais-container {
+    display: grid;
+    width: 400px;
+    margin: auto;
+}
+
+.botao-azul {
+    margin: auto;
+    width: 317px;
+    height: 105px;
+    background-color: var(--corDarkBlue300);
+    color: white;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
+.botao-claro{
+    margin: auto;
+    width: 317px;
+    height: 105px;
+    color: var(--corDarkBlue300);
+    border-color: var(--corDarkBlue300);
+    border-radius: 24px;
+    cursor: pointer;
+}
+#botao-comecar {
+    margin-top: 306px;
+}
+
+#botao-adicionar{
+    margin-top: 53px;
+}
+
+#tela-adicionar {
+    display: none;
+    width: 700px;
+    margin: auto;
+    margin-top: 44px;
+}
+
+#aviso {
+    display: block;
+    margin-top: 190px;
+    margin-bottom: 10px;
+}
+
+#botoes-adicionar-container {
+    margin-top: 24px;
+}
+
+#botao-cancelar {
+    margin-left: 24px;
+}
+
+#tela-jogo {
+    display: none;
+    width: 700px;
+    margin: auto;
+}
+
+#forca {
+    width: 310px;
+    height: 360px;
+    margin: auto;
+    position: relative;
+}
+
+.elementos-da-forca {
+    display: none;
+    position: absolute;
+}
+
+#corpo-braco-direito {
+    top: 110px;
+}
+
+#corpo-braco-esquerdo,#corpo-pe-esquerdo {
+    left: 190px;
+    top: 110px;
+}
+
+#corpo-pe-direito,#corpo-pe-esquerdo {
+    top: 240px;
+}
+
+#corpo-tronco {
+    top: 108px;
+}
+
+#corpo-cabeca {
+    left: 195px;
+    top: 48px;
+}
+
+#forca-corda,#corpo-pe-direito,#corpo-braco-direito,#corpo-tronco {
+    left: 224px;
+}
+#forca-suporte {
+    left: 50px;
+    top: -10px;
+}
+
+#forca-aresta {
+    left: 50px;
+}
+
+#forca-base {
+    top: 346px;
+}
+
+#palavras {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.container-letra {
+    width: 100px;
+    height: 50px;
+    position: relative;
+}
+
+.campo-da-letra {
+    position: absolute;
+    top: 50px;
+}
+
+.digitado, .digitado-errado {
+    display: none;
+    position: absolute;
+    font-size: 32px;
+    top: 10px;
+    left: 30px;
+}
+#palavras-incorretas {
+    display: flex;
+    flex-wrap: wrap;
+}
+.digitado-errado {
+    display: block;
+    margin-top: 30px;
+}
+
+#botoes-jogo-container {
+    margin-top: 150px;
+}
+.container-dica {
+    margin-top: 25px;
+    font-size: 22px;
+}
+.container-mensagem {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 200px;
+    left: 65%;
+}
+
+.mensagem-derrota,.mensagem-vitoria {
+    font-size: 32px;
+    color: red;
+}
+.mensagem-vitoria {
+    color: green;
+}
+
+footer {
+    background-color: var(--corDarkBlue300);
+    color: white;
+    text-align: center;
+    padding: 50px;
+    margin-top: 108px;
+}
+
+#img-github {
+    margin-top: 10px;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+#img-linkedin {
+    margin-left: 50px;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+#img-github:hover, #img-linkedin:hover {
+    background-color: white;
+    opacity: 1;
+}

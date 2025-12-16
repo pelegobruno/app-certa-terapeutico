@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogos Terapêuticos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!-- =========================
+       SPLASH DO APP
+  ========================= -->
+  <section id="splashApp" class="tela ativa">
+    <img
+      src="../assets/splash/certa-a-png.png"
+      alt="Logo CERTA"
+      class="logo-splash"
+    >
+
+    <div class="splash-dev">
+      Desenvolvido e agradecimentos por
+    </div>
+
+    <div class="splash-nome">
+      Psicólogo Bruno Costa
+    </div>
+  </section>
+
+  <!-- =========================
+       MENU PRINCIPAL
+  ========================= -->
+  <section id="menuApp" class="tela">
+    <h1 class="titulo">Jogos Terapêuticos</h1>
+
+    <div class="grid-jogos">
+
+      <!-- TIMER TERAPÊUTICO -->
+      <div class="card" onclick="abrirTimer()">
+        ⏱️
+        <span>Timer Terapêutico</span>
+      </div>
+
+      <!-- JOGOS FUTUROS -->
+      <div class="card" onclick="abrirJogo('cobra')">
+        🐍
+        <span>Jogo da Cobra</span>
+      </div>
+
+      <div class="card" onclick="abrirJogo('memoria')">
+        🧠
+        <span>Jogo da Memória</span>
+      </div>
+
+      <div class="card" onclick="abrirJogo('velha')">
+        ❌⭕
+        <span>Jogo da Velha</span>
+      </div>
+
+      <div class="card" onclick="abrirJogo('forca')">
+        🔤
+        <span>Jogo da Forca</span>
+      </div>
+
+      <div class="card" onclick="abrirJogo('xadrez')">
+        ♟️
+        <span>Xadrez</span>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
