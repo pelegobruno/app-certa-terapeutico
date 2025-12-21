@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo da Velha</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <!-- BOTÃO MENU -->
+  <div class="menu-top">
+    <a href="../../index.html" class="btn-cartoon">
+      ⬅ Voltar ao Menu
+    </a>
+  </div>
+
+  <!-- CABEÇALHO -->
+  <section class="game-section">
+    <h2>Jogo da Velha</h2>
+    <p id="status-jogo">Vez do jogador ❌</p>
+  </section>
+
+  <!-- JOGO -->
+  <section class="velha-container">
+    <div class="tabuleiro" id="tabuleiro">
+
+      <div class="celula" data-index="0"></div>
+      <div class="celula" data-index="1"></div>
+      <div class="celula" data-index="2"></div>
+      <div class="celula" data-index="3"></div>
+      <div class="celula" data-index="4"></div>
+      <div class="celula" data-index="5"></div>
+      <div class="celula" data-index="6"></div>
+      <div class="celula" data-index="7"></div>
+      <div class="celula" data-index="8"></div>
+
+      <!-- linha de vitória -->
+      <div id="win-line" class="win-line"></div>
+    </div>
+
+    <button id="btn-restart" class="btn-restart">
+      🔄 Jogar novamente
+    </button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
