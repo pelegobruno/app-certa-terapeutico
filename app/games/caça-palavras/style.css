@@ -1,112 +1,169 @@
+/* =========================
+   BASE
+========================= */
+
 body{
   font-family: Consolas;
+  background: #c8a36a; /* MESMO FUNDO DO MENU */
 }
 
+/* layout */
 .row{
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 16px;
 }
 
 .row.row-space-evenly{
   justify-content: space-evenly;
 }
 
+/* =========================
+   CAIXAS
+========================= */
+
 .box{
   display: flex;
   flex-direction: column;
-  border: 2px solid #ccc;
-  width: fit-content;
-  padding: 10px 20px;
+  padding: 14px 18px;
   margin: 10px 0;
-  border-radius: 5px;
+  border-radius: 18px;
+
+  background: #fff3c4;                 /* amarelo claro */
+  border: 4px solid #5d4037;            /* marrom */
+  box-shadow: 6px 6px 0 #6d4c41;
 }
 
-.box-3{
-  width: calc(3*100%/12);
-}
+/* colunas */
+.box-6{ width: 50%; }
 
-.box-4{
-  width: calc(4*100%/12);
-}
-
-.box-6{
-  width: calc(6*100%/12);
-}
-
-.box-8{
-  width: calc(8*100%/12);
-}
-
-.box-12{
-  width: calc(12*100%/12);
-}
+/* =========================
+   TÍTULOS
+========================= */
 
 .form-titulo{
+  font-size: 18pt;
   font-weight: bold;
-  font-size: 14pt;
   text-align: center;
+  color: #3e2723;
+  margin-bottom: 10px;
 }
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn{
+  width: fit-content;
+  padding: 6px 16px;
+  cursor: pointer;
+
+  background: linear-gradient(#ffeb3b, #f9a825);
+  color: #3e2723;
+
+  border: 4px solid #5d4037;
+  border-radius: 20px;
+
+  font-weight: bold;
+  box-shadow: 4px 4px 0 #6d4c41;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover{
+  background: linear-gradient(#fff176, #fbc02d);
+}
+
+.btn:active{
+  transform: translate(4px,4px);
+  box-shadow: none;
+}
+
+/* =========================
+   INPUT
+========================= */
 
 .form-group{
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
-}
-
-.form-group>label{
-  font-size: 9pt;
+  margin: 12px 0;
 }
 
 .input{
-  border: 1px solid transparent;
-  border-bottom-color: #ccc;
-  outline-style: none;
-  padding: 3px;
+  border: none;
+  border-bottom: 3px solid #5d4037;
+  outline: none;
+  padding: 6px;
+  background: transparent;
+  font-weight: bold;
 }
 
-.btn {
-  border: 1px solid #ccc;
-  width: fit-content;
-  padding: 5px 10px;
-  cursor: pointer;
+/* =========================
+   LISTA DE PALAVRAS
+========================= */
+
+.lista-palavras{
+  list-style: none;
+  margin: 0;
+  padding: 14px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+
+  background: #ffe082;
+  border: 4px solid #5d4037;
+  border-radius: 18px;
+
+  box-shadow: 5px 5px 0 #6d4c41;
 }
 
-.btn:hover{
-  background-color: #eee;
+/* palavra */
+.item-palavra{
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+
+  background: #ffeb3b;
+  color: #3e2723;
+
+  border-radius: 16px;
+  border: 3px solid #5d4037;
+  box-shadow: 3px 3px 0 #6d4c41;
 }
 
-.mensagem-erro{
-  display: none;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #eba2a2;
-  color: #a91c1c;
-  padding: 5px 10px;
-  border: 1px solid #a91c1c;
-  border-left-width: 5px;
-  margin-top: 5px;
-  font-size: 10pt;
-  border-radius: 3px;
+/* encontrada */
+.item-palavra.item-palavra-encontrada{
+  background: #c8e6c9;
+  color: #1b5e20;
+  border-color: #2e7d32;
+  box-shadow: none;
+  opacity: 0.85;
 }
 
-.mensagem-erro.active{
-  display: block;
-}
+/* =========================
+   CAÇA-PALAVRAS (GRID)
+========================= */
 
 .grid-caca-palavras{
   position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background-color: #eee;
-  padding: 5px;
+
   width: min(70vw, 70vh);
   height: min(70vw, 70vh);
+
   margin: auto;
+  padding: 8px;
+
+  background: #fff3c4;
+  border: 4px solid #5d4037;
+  border-radius: 20px;
+
+  box-shadow: 6px 6px 0 #6d4c41;
 }
 
 .grid-linha{
@@ -117,130 +174,31 @@ body{
 }
 
 .grid-celula{
-  flex: 2;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* letras */
 .grid-letra{
-  font-size: 12px;
-  color: #000;
+  font-size: 13px;
+  font-weight: bold;
+  color: #3e2723;
   cursor: pointer;
   user-select: none;
 }
 
+/* letras fixas NÃO mudam de cor */
 .grid-letra.grid-letra-fixa{
-  /*color: red;*/
-}
-
-.canvas-selecao-palavras{
-  position: absolute;
-  border: 2px solid transparent;
-  width: 100%;
-  height: 100%;
-}
-
-.lista-palavras{
-  font-size: 14px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  user-select: none;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background-color: #eee;
-  padding: 5px 10px;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item-palavra{
-  width: 30%;
-  font-size: 12px;
-  padding: 2px;
-  /*cursor: pointer;*/
-}
-
-.item-palavra.item-palavra-encontrada{
-  text-decoration: line-through;
-}
-
-.form-cadastrar-palavra{
-  width: 100%;
-}
-
-/* =========================
-   🎨 ESTILO CARTOON
-   (camada visual)
-========================= */
-
-/* caixas principais */
-.box{
-  background: #fff8dc;
-  border: 3px solid #5d4037;
-  box-shadow: 6px 6px 0 #5d4037;
-}
-
-/* títulos */
-.form-titulo{
-  font-size: 16pt;
-  letter-spacing: 1px;
   color: #3e2723;
 }
 
-/* botões */
-.btn{
-  background: linear-gradient(#ffeb3b, #f9a825);
-  border: 3px solid #5d4037;
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-weight: bold;
-  box-shadow: 4px 4px 0 #6d4c41;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.btn:hover{
-  background: linear-gradient(#fff176, #fbc02d);
-}
-
-.btn:active{
-  transform: translate(4px,4px);
-  box-shadow: 0 0 0 #6d4c41;
-}
-
 /* =========================
-   AJUSTE – LISTA DE PALAVRAS MAIS SOLTA
+   CANVAS
 ========================= */
 
-.lista-palavras{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;            /* espaço entre palavras */
-  padding: 12px;
-  align-items: flex-start;
-}
-
-/* palavra individual */
-.item-palavra{
-  width: auto;              /* 🔥 remove rigidez */
-  min-width: fit-content;
-  padding: 6px 12px;        /* mais “respiro” */
-  font-size: 13px;
-  border-radius: 14px;      /* cartoon */
-  background: #ffe082;
-  border: 2px solid #5d4037;
-  box-shadow: 3px 3px 0 #6d4c41;
-  white-space: nowrap;      /* evita quebra feia */
-}
-
-/* palavra encontrada */
-.item-palavra.item-palavra-encontrada{
-  background: #c8e6c9;
-  color: #1b5e20;
-  border-color: #2e7d32;
-  box-shadow: none;
-  opacity: 0.8;
+.canvas-selecao-palavras{
+  position: absolute;
+  inset: 0;
 }

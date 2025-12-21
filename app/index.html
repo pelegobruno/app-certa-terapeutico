@@ -13,7 +13,7 @@
   ========================= -->
   <section id="splashApp" class="tela ativa">
     <img
-      src="../assets/splash/certa-a-png.png"
+      src="../app/games/timer/assets/splash/certa-a-png.png"
       alt="Logo CERTA"
       class="logo-splash"
     >
@@ -36,12 +36,14 @@
     <div class="grid-jogos">
 
       <!-- TIMER TERAPÊUTICO -->
-      <div class="card" onclick="abrirTimer()">
+      
+
+      <!-- JOGOS FUTUROS -->
+       <div class="card" onclick="abrirJogo('timer')">
         ⏱️
         <span>Timer Terapêutico</span>
       </div>
 
-      <!-- JOGOS FUTUROS -->
       <div class="card" onclick="abrirJogo('cobra')">
         🐍
         <span>Jogo da Cobra</span>
@@ -57,10 +59,16 @@
         <span>Jogo da Velha</span>
       </div>
 
+      <div class="card" onclick="abrirJogo('caça-palavras')">
+  🔎
+  <span>Caça-Palavras</span>
+</div>
+
       <div class="card" onclick="abrirJogo('forca')">
         🔤
         <span>Jogo da Forca</span>
       </div>
+      
 
       <div class="card" onclick="abrirJogo('xadrez')">
         ♟️

@@ -1,101 +1,262 @@
-/***Style Adriana Lima ***/
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap");
 
+/* ==================================================
+   1. RESET GLOBAL
+================================================== */
 * {
+  margin: 0;
   padding: 0;
-  margin: 0; 
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
+html,
 body {
-  justify-content: center;
-  height: 30px;
-  width: 100%;
-  display: flex;
-  text-align: center;
-  font-family: "Muli", sans-serif;
-  color: #fff;
-}
-
-a{
-  color: #fff;
-  list-style-type: none;
-}
-
-a:hover{
-  color: #f30698;
-  list-style-type: none;
-}
-
-.game-section {
-  width: 100%;
-  height: 100vh;
-}
-.fa {
-  color: #f30698;
-}
-.game-area {
-  background: #fff;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  align-items: center;
-}
-/******Section*****/
-.container-fluid {
-  background: deepskyblue;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-}
-
-/***Style Games *****/
-.memory-game {
-  padding-left: 60px;
-  position: relative;
-  display: flex;
-  width: 650px;
-  max-width: 100% !important;
-  height: 100vh;
-  margin: 60px;
-  flex-wrap: wrap;
-  perspective: 1000px;
-}
-.memory-card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  margin: 5px;
-  position: relative;
-  box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 30%);
-  transform: scale(1);
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
-}
-
-.front-face,
-.back-face {
   width: 100%;
   height: 100%;
-  position: absolute;
-  display: flex;
-  border: #333 8px;
-  background: #341f44;
-  backface-visibility: hidden;
-  list-style: none;
 }
 
-.memory-card:active {
-  transform: scale(0.97);
-  transition: transform 0.2s;
+/* ==================================================
+   2. FUNDO GERAL DO APP
+================================================== */
+body {
+  font-family: "Baloo 2", cursive;
+  background: #ffb703;
+  overflow-x: hidden;
+}
+
+/* ==================================================
+   3. BOTÃO VOLTAR AO MENU (FIXO)
+================================================== */
+.menu-top {
+  position: fixed;
+  top: 125px;
+  left: 16px;
+  z-index: 9999;
+}
+
+.btn-cartoon {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+
+  font-size: 18px;
+  font-weight: 800;
+  padding: 4px 8px;
+
+  border-radius: 48px;
+  background: linear-gradient(180deg, #ffe066, #ffb703);
+  color: #6b3f00;
+
+  border: 5px solid #b36a00;
+  text-decoration: none;
+
+  box-shadow:
+    0 4px 0 #b36a00,
+    0 8px 0 #8c5200,
+    0 4px 2px rgba(0, 0, 0, 0.35);
+
+  transition: transform 0.15s ease;
+}
+
+.btn-cartoon:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.btn-cartoon:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 2px 0 #8c5200,
+    0 6px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* ==================================================
+   4. FAIXA DE TÍTULO / CABEÇALHO
+================================================== */
+.game-section {
+  width: 100%;
+  background: linear-gradient(180deg, #fff3a0, #ffb703);
+  padding: 90px 20px 60px;
+  text-align: center;
+}
+
+/* título */
+.game-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #8c5200;
+  margin-bottom: 10px;
+}
+
+/* texto */
+.game-section p {
+  font-size: 16px;
+  color: #8c5200;
+}
+
+/* ícone */
+.game-section .fa-graduation-cap {
+  color: #f30698;
+  margin-bottom: 10px;
+}
+
+/* ==================================================
+   5. AJUSTES BOOTSTRAP (NECESSÁRIOS)
+================================================== */
+.container-fluid {
+  background: transparent !important;
+}
+
+.row {
+  justify-content: center;
+}
+
+/* ==================================================
+   6. GRID DO JOGO DA MEMÓRIA
+================================================== */
+.memory-game {
+  margin: 40px auto 0;
+  width: 650px;
+  max-width: 95%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  perspective: 1000px;
+}
+
+/* ==================================================
+   7. CARTAS
+================================================== */
+.memory-card {
+  width: calc(25% - 14px);
+  height: 160px;
+  margin: 7px;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+
+  border-radius: 16px;
+  background: #ffffff;
+  cursor: pointer;
+
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
 .memory-card.flip {
   transform: rotateY(180deg);
 }
 
+.memory-card:active {
+  transform: scale(0.95);
+}
+
+/* ==================================================
+   8. FACES DAS CARTAS
+================================================== */
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  border-radius: 16px;
+  backface-visibility: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .front-face {
   transform: rotateY(180deg);
+}
+
+.front-face img,
+.back-face img {
+  max-width: 55%;
+  max-height: 55%;
+}
+
+/* ==================================================
+   9. BOTÃO TENTAR DE NOVO (FORA DO GRID)
+================================================== */
+.btn-restart {
+  display: none;              /* JS controla */
+  margin: 10px auto 30px;
+
+  position: relative;         /* evita herança de transform */
+  z-index: 10;
+
+  font-family: "Baloo 2", cursive;
+  font-size: 22px;
+  font-weight: 800;
+
+  padding: 2px 12px;
+  border-radius: 32px;
+
+  background: linear-gradient(180deg, #9bf6ff, #4dabf7);
+  color: #003566;
+
+  border: 6px solid #1c7ed6;
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 0 #1c7ed6,
+    0 10px 0 #1864ab,
+    0 18px 26px rgba(0, 0, 0, 0.35);
+
+  transition: transform 0.15s ease;
+}
+
+.btn-restart:hover {
+  transform: translateY(-3px);
+}
+
+.btn-restart:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 2px 0 #1864ab,
+    0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* ==================================================
+   10. RESPONSIVO
+================================================== */
+@media (max-width: 768px) {
+  .memory-card {
+    width: calc(33.333% - 14px);
+    height: 140px;
+  }
+
+  .btn-cartoon {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
+
+  .btn-restart {
+    font-size: 20px;
+    padding: 16px 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .memory-card {
+    width: calc(50% - 14px);
+    height: 130px;
+  }
+}
+
+
+
+
+
+
+/* ==============================
+   BLOQUEIO DE SCROLL AO FINAL
+================================ */
+.no-scroll {
+  overflow: hidden;
 }

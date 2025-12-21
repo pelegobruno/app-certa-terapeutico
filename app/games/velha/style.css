@@ -1,14 +1,217 @@
-body { text-align:center; background:#c8a36a; }
-.tabuleiro {
-  display:grid;
-  grid-template-columns: repeat(3,80px);
-  gap:5px;
-  justify-content:center;
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap");
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.casa {
-  width:80px;
-  height:80px;
-  font-size:40px;
-  background:#fff;
-  cursor:pointer;
+
+body {
+  font-family: "Baloo 2", cursive;
+  background: linear-gradient(180deg, #c8a36a);
+  text-align: center;
+}
+
+/* BOTÃO MENU */
+/* ==============================
+   BOTÃO VOLTAR AO MENU (CARTOON)
+================================ */
+
+.menu-top {
+  position: fixed;
+  top: 105px;          /* mais próximo do topo */
+  left: 104px;         /* alinhado ao padrão */
+  z-index: 1000;
+}
+
+.btn-cartoon {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 4px 6px;
+  border-radius: 32px;
+
+  font-family: "Baloo 2", cursive;
+  font-size: 16px;
+  font-weight: 800;
+
+  color: #6b3f00;
+  background: linear-gradient(180deg, #ffe066, #ffb703);
+
+  border: 4px solid #b36a00;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 0 #b36a00,
+    0 8px 0 #8c5200,
+    0 4px 0px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* hover: sobe levemente */
+.btn-cartoon:hover {
+  transform: translateY(-2px);
+}
+
+/* clique: afunda */
+.btn-cartoon:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 2px 0 #8c5200,
+    0 6px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+/* CABEÇALHO */
+
+.game-section {
+  width: 100%;
+  background: linear-gradient(180deg, #fff3a0, #c8a36a);
+  padding: 90px 20px 60px;
+  text-align: center;
+}
+
+/* título */
+.game-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #8c5200;
+  margin-bottom: 10px;
+}
+
+/* texto */
+.game-section p {
+  font-size: 16px;
+  color: #8c5200;
+}
+
+/* ícone */
+.game-section .fa-graduation-cap {
+  color: #f30698;
+  margin-bottom: 10px;
+}
+
+.game-section {
+  padding: 90px 20px 20px;
+}
+
+.game-section h2 {
+  font-size: 32px;
+  color: #8c5200;
+}
+
+#status-jogo {
+  margin-top: 10px;
+  font-weight: 800;
+}
+
+/* CONTAINER */
+.velha-container {
+  margin-top: 20px;
+}
+
+/* TABULEIRO */
+.tabuleiro {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); /* 🔥 ESSENCIAL */
+  gap: 12px;
+}
+
+
+/* CÉLULAS */
+.celula {
+  background: #ffffff;
+  border-radius: 22px;
+  font-size: 56px;
+  font-weight: 800;
+  color: #ff0054;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+/* BLOQUEIO TOTAL APÓS FIM */
+.tabuleiro.finished .celula {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* BRILHO SIMPLES (SEM SCALE) */
+.celula.x,
+.celula.o {
+  box-shadow: 0 0 18px rgba(255, 0, 84, 0.8);
+}
+
+/* LINHA DE VITÓRIA */
+.win-line {
+  position: absolute;
+  height: 8px;
+  background: #ff0054;
+  border-radius: 10px;
+  transform-origin: left center;
+  display: none;
+}
+
+/* BOTÃO RESTART */
+.btn-restart {
+  display: none;
+  margin-top: 28px;
+
+  padding: 4px 6px;
+  border-radius: 32px;
+
+  font-family: "Baloo 2", cursive;
+  font-size: 18px;
+  font-weight: 800;
+
+  color: #003566;
+  background: linear-gradient(
+    180deg,
+    #e0f7ff 0%,
+    #9bdcff 50%,
+    #4dabf7 100%
+  );
+
+  border: 4px solid #1c7ed6;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 0 #1c7ed6,
+    0 8px 0 #1864ab,
+    0 14px 20px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* ❄️ efeito gelo ao passar o mouse */
+.btn-restart:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+/* ❄️ efeito de pressionar */
+.btn-restart:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 2px 0 #1864ab,
+    0 6px 10px rgba(0, 0, 0, 0.25);
 }

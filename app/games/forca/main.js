@@ -1,295 +1,211 @@
 const telaOpcoes = document.querySelector("#tela-opcoes");
-const telaAdiciona = document.querySelector("#tela-adicionar");
+const telaAdicionar = document.querySelector("#tela-adicionar");
 const telaJogo = document.querySelector("#tela-jogo");
-const letras = document.getElementsByClassName("digitado")
-const montandoTabuleiro = document.querySelector("#palavras");
-const letrasErradas = document.querySelector("#palavras-incorretas");
+
+const palavrasDiv = document.querySelector("#palavras");
+const errosDiv = document.querySelector("#palavras-incorretas");
 const forca = document.getElementsByClassName("elementos-da-forca");
+
 const addPalavra = document.querySelector("#adicionar-area");
 const addDica = document.querySelector("#adicionar-area-dica");
 
-var palavrasRegistradas =   [{"palavra":"ABACAXI","dica":"FRUTA"},{"palavra":"BANANA","dica":"FRUTA"},{"palavra":"ABACATE","dica":"FRUTA"},
-                             {"palavra":"BRASIL","dica":"PAÍS"},{"palavra":"INGLATERRA","dica":"PAÍS"},{"palavra":"FUTEBOL","dica":"ESPORTE"}];
+/* =========================
+   BANCO DE PALAVRAS
+========================= */
+let palavras = [
+  { palavra: "ROSA", dica: "FLOR" },
+  { palavra: "ABACAXI", dica: "FRUTA" },
+  { palavra: "BRASIL", dica: "PAIS" }
+];
 
-var palavrasDescobertas = [];
-var palavrasErradas = [];
-var palavraEnigma;
-var tentativasErradas = 9;
-var tentativasCorretas = 0;
+/* =========================
+   ESTADO DO JOGO
+========================= */
+let palavraAtual;
+let letrasCorretas = [];
+let letrasErradas = [];
+let erros = 0;
+const TOTAL_PNG = 10; // 0.png até 9.png
 
-function Tela(opcao) 
-{
-    // 1 = Começar um jogo
-    // 2 = Adicionar uma palvra nova
-    // 3 = Salvar e Começar a jogar
-    // 4 = Cancelar
-    // 5 = Novo jogo
-    // 6 = Desistir
-    if(opcao == 1)
-    {
-        //Começa um Jogo
-        telaOpcoes.setAttribute('style','display:none');
-        telaAdiciona.setAttribute('style','display:none');
-        telaJogo.setAttribute('style','display:block');
-        palavraEnigma = Sortear();
-        CriandoTabuleiro();
-        tentativasCorretas = palavraEnigma.palavra.length
-        document.body.onkeypress = Tecla;
-        console.log(palavraEnigma.palavra)
-    }
-    else if (opcao == 2)
-    {
-        //Adicionar palavra , falta a implementacao de criar nova palavra
-        telaOpcoes.setAttribute('style','display:none');
-        telaAdiciona.setAttribute('style','display:block');
-        telaJogo.setAttribute('style','display:none');
-    }
-    else if (opcao == 3)
-    {
-        //Salvar e Começar
-        Reestart();
-        var validaSalvamento = Salvar();
-
-        if(validaSalvamento)
-        {
-            telaOpcoes.setAttribute('style','display:none');
-            telaAdiciona.setAttribute('style','display:none');
-            telaJogo.setAttribute('style','display:block');
-            palavraEnigma = Sortear();
-            CriandoTabuleiro();
-            tentativasCorretas = palavraEnigma.palavra.length;
-            document.body.onkeypress = Tecla;
-            console.log(palavraEnigma.palavra);
-        }
-    }
-    else if (opcao == 4)
-    {
-        //Cancela
-        telaOpcoes.setAttribute('style', 'display:grid');
-        telaAdiciona.setAttribute('style','display:none');
-        telaJogo.setAttribute('style','display:none');
-    }
-    else if (opcao == 5)
-    {
-        //Novo jogo , sortear nova palavra.
-        telaOpcoes.setAttribute('style','display:none');
-        telaAdiciona.setAttribute('style','display:none');
-        telaJogo.setAttribute('style','display:block');
-        Reestart();
-        CriandoTabuleiro();
-    }
-    else if (opcao == 6)
-    {
-        //Desistir
-        telaOpcoes.setAttribute('style', 'display:grid');
-        telaAdiciona.setAttribute('style','display:none');
-        telaJogo.setAttribute('style','display:none');
-        Reestart();
-    }
+/* =========================
+   CONTROLE DE TELAS
+========================= */
+function Tela(opcao) {
+  if (opcao === 1) iniciarJogo();
+  if (opcao === 2) {
+    telaOpcoes.style.display = "none";
+    telaAdicionar.style.display = "block";
+  }
+  if (opcao === 3 && salvar()) iniciarJogo();
+  if (opcao === 4) {
+    telaAdicionar.style.display = "none";
+    telaOpcoes.style.display = "block";
+  }
+  if (opcao === 5) iniciarJogo();
+  if (opcao === 6) {
+    telaJogo.style.display = "none";
+    telaOpcoes.style.display = "block";
+  }
 }
 
-function CriandoTabuleiro()
-{
-    montandoTabuleiro.innerHTML = "";
-    for (let i = 0; i < palavraEnigma.palavra.length; i++) 
-    {
-        var letra = palavraEnigma.palavra[i];
+/* =========================
+   INICIAR JOGO
+========================= */
+function iniciarJogo() {
+  telaOpcoes.style.display = "none";
+  telaAdicionar.style.display = "none";
+  telaJogo.style.display = "block";
 
-        montandoTabuleiro.innerHTML +=  `<div class="container-letra">` + '\n' +
-                                        `<span class="digitado">${letra.toUpperCase()}</span>` + '\n' +
-                                         `<img src="imagens/forca/Palavra.png" alt="sublinhado para a palavra" class="campo-da-letra">` + '\n' +
-                                         `</div>`;                               
-    }
-    letrasErradas.insertAdjacentHTML("beforebegin",'<div class="container-dica">');
-    var containerDica = document.querySelector(".container-dica");
-    containerDica.appendChild(document.createElement("p")).textContent = "DICA: " + palavraEnigma.dica;
+  resetar();
+  criarTabuleiro();
+  document.body.onkeydown = tecla;
 }
 
-function Sortear() 
-{
-    var sortear = Math.floor(Math.random() * palavrasRegistradas.length);
-    var palavraEnigmaSorteada = palavrasRegistradas[sortear];
-    return palavraEnigmaSorteada;
+/* =========================
+   TABULEIRO
+========================= */
+function criarTabuleiro() {
+  palavrasDiv.innerHTML = "";
+
+  palavraAtual.palavra.split("").forEach(letra => {
+    const div = document.createElement("div");
+    div.className = "container-letra";
+
+    const span = document.createElement("span");
+    span.className = "digitado";
+    span.textContent = letra;
+    span.style.display = "none";
+
+    const img = document.createElement("img");
+    img.src = "imagens/forca/Palavra.png";
+    img.className = "campo-da-letra";
+
+    div.appendChild(span);
+    div.appendChild(img);
+    palavrasDiv.appendChild(div);
+  });
+
+  criarDica();
 }
 
-function Tecla()
-{
-    if(tentativasErradas > -1 && tentativasCorretas > 0)
-    {
-        if(event.keyCode>= 65 && event.keyCode <= 90) 
-        {
-            var letraDescoberta = String.fromCharCode(event.keyCode)
-        
-            if(palavraEnigma.palavra.match(letraDescoberta))
-            {
-                var validaEntradaArray = true;
-                for (let i = 0; i < palavrasDescobertas.length; i++) 
-                {
-                    if(palavrasDescobertas[i] == letraDescoberta)
-                    {
-                        validaEntradaArray = false;
-                    }
-                }
-                if (validaEntradaArray == true)
-                {
-                    palavrasDescobertas.push(letraDescoberta);
-                    RevelarLetra();
-                    ValidaVitoria(letraDescoberta);
-                }
-                
-            }
-            if(!palavraEnigma.palavra.match(letraDescoberta))
-            {
-                var validaEntradaArray = true;
-                for (let i = 0; i < palavrasErradas.length; i++) 
-                {
-                    if(palavrasErradas[i] == letraDescoberta)
-                    {
-                        validaEntradaArray = false;
-                    }
-                }
-                if (validaEntradaArray == true)
-                {
-                    palavrasErradas.push(letraDescoberta);
-                    tentativasErradas--;
-                    EscreverLetraErrada();
-                }
-            }
-        }
-        else
-        {
-            window.alert("Apenas letras maiusculas");
-        }
-    }
+/* =========================
+   DICA
+========================= */
+function criarDica() {
+  remover(".container-dica");
+  const d = document.createElement("div");
+  d.className = "container-dica";
+  d.innerText = "DICA: " + palavraAtual.dica;
+  errosDiv.before(d);
 }
 
-function RevelarLetra()
-{
-    for(let i = 0; i < palavrasDescobertas.length; i++)
-    {
-        for(let n = 0; n < letras.length; n++)
-        {
-            if(palavrasDescobertas[i] == letras[n].textContent)
-            {
-                letras[n].setAttribute('style','display:block')
-            }
-        }
-    }
+/* =========================
+   TECLADO
+========================= */
+function tecla(e) {
+  if (!/^[a-zA-Z]$/.test(e.key)) return;
+  if (erros >= TOTAL_PNG) return;
+
+  const letra = e.key.toUpperCase();
+  if (letrasCorretas.includes(letra) || letrasErradas.includes(letra)) return;
+
+  if (palavraAtual.palavra.includes(letra)) {
+    letrasCorretas.push(letra);
+    revelarLetra(letra);
+    verificarVitoria();
+  } else {
+    letrasErradas.push(letra);
+    erros++;
+    atualizarErros();
+    desenharForca();
+  }
 }
 
-function EscreverLetraErrada()
-{
-    letrasErradas.innerHTML = ""
-    for (let i = 0; i < palavrasErradas.length; i++) 
-    {
-        if(letrasErradas.innerHTML == '')
-        {
-            letrasErradas.innerHTML += `<div class="container-letra">` + '\n' +
-                                        `<span class="digitado-errado">Erros:</span>` + '\n' +
-                                        `</div>`    
-            letrasErradas.innerHTML += `<div class="container-letra">` + '\n' +
-                                        `<span class="digitado-errado">${palavrasErradas[i]}</span>` + '\n' +
-                                        `</div>`     
-        }
-        else
-        {
-            letrasErradas.innerHTML += `<div class="container-letra">` + '\n' +
-                                        `<span class="digitado-errado">${palavrasErradas[i]}</span>` + '\n' +
-                                        `</div>` 
-        }
+/* =========================
+   REVELAR LETRA
+========================= */
+function revelarLetra(letra) {
+  document.querySelectorAll(".digitado").forEach(span => {
+    if (span.textContent === letra) {
+      span.style.display = "block";
     }
-    DesenharForca();
+  });
 }
 
-function DesenharForca()
-{
-    if(tentativasErradas >= -1)
-    {
-        for(let i = 9; i > tentativasErradas; i--)
-        {
-            for(let n = 9; n > tentativasErradas; n--)
-            {
-                forca[n].setAttribute('style','display:block');
-            }
-        }
-        if(tentativasErradas == -1)
-        {
-            MensagemPerder();
-        }
-    }
+/* =========================
+   ERROS
+========================= */
+function atualizarErros() {
+  errosDiv.innerText = "Erros: " + letrasErradas.join(" ");
 }
 
-function MensagemPerder() 
-{
-    telaJogo.appendChild(document.createElement('div')).classList.add('container-mensagem');
-    document.querySelector(".container-mensagem").appendChild(document.createElement('p')).classList.add("mensagem-derrota");
-    document.querySelector(".mensagem-derrota").textContent = "Voce Perdeu!";
+/* =========================
+   FORCA (1 ERRO = 1 PNG)
+========================= */
+function desenharForca() {
+  if (erros > 0 && erros <= TOTAL_PNG) {
+    forca[erros - 1].style.display = "block";
+  }
+
+  if (erros === TOTAL_PNG) {
+    finalizar("Você perdeu!");
+  }
 }
 
-function MensagemGanhou()
-{
-    telaJogo.appendChild(document.createElement('div')).classList.add('container-mensagem');
-    document.querySelector(".container-mensagem").appendChild(document.createElement('p')).classList.add("mensagem-vitoria");
-    document.querySelector(".mensagem-vitoria").textContent = "Voce Ganhou!";
+/* =========================
+   VITÓRIA
+========================= */
+function verificarVitoria() {
+  const letrasUnicas = [...new Set(palavraAtual.palavra)];
+  if (letrasUnicas.every(l => letrasCorretas.includes(l))) {
+    finalizar("Você ganhou!");
+  }
 }
 
-function ValidaVitoria(letraDescoberta)
-{
-    for(let i = 0; i < palavraEnigma.palavra.length;i++)
-    {
-        if(letraDescoberta == palavraEnigma.palavra[i])
-        {
-            tentativasCorretas--;
-        }
-        if(tentativasCorretas == 0)
-        {
-            MensagemGanhou();
-        }
-    }
+/* =========================
+   FINALIZAR JOGO
+========================= */
+function finalizar(msg) {
+  document.body.onkeydown = null;
+  remover(".container-mensagem");
+
+  const m = document.createElement("div");
+  m.className = "container-mensagem";
+  m.innerText = msg;
+  telaJogo.appendChild(m);
 }
 
-function Salvar()
-{
-    if(addPalavra.value != "" && addDica.value != "")
-    {
-        console.log(addPalavra.value + " " +addDica.value);
-        var palavra = addPalavra.value.toUpperCase();
-        var dica = addDica.value.toUpperCase();
-        palavrasRegistradas.push({palavra,dica});
-        return true;
-    }
-    else
-    {
-        window.alert("Necessario uma palavra e uma dica");
-        return false;
-    } 
+/* =========================
+   UTILIDADES
+========================= */
+function salvar() {
+  if (addPalavra.value && addDica.value) {
+    palavras.push({
+      palavra: addPalavra.value.toUpperCase(),
+      dica: addDica.value.toUpperCase()
+    });
+    addPalavra.value = "";
+    addDica.value = "";
+    return true;
+  }
+  return false;
 }
 
-function Reestart()
-{
-    tentativasCorretas = 0;
-    tentativasErradas = 9;
-    palavrasDescobertas = [];
-    palavrasErradas = [];
-    palavraEnigma = Sortear();
-    tentativasCorretas = palavraEnigma.palavra.length
+function resetar() {
+  letrasCorretas = [];
+  letrasErradas = [];
+  erros = 0;
 
-    for(let i = 0; i <= 9 ; i++)
-    {
-        forca[i].setAttribute('style','display:none');
-    }
+  palavraAtual = palavras[Math.floor(Math.random() * palavras.length)];
+  errosDiv.innerHTML = "";
 
-    var removeDicas = document.getElementsByClassName("container-dica");
-    if(removeDicas.length > 0)
-    {
-       removeDicas[0].remove();
-    }
-    
-    var removeMensagem = document.getElementsByClassName("container-mensagem")
-    if(removeMensagem.length > 0)
-    {
-        removeMensagem[0].remove();
-    }
+  remover(".container-dica");
+  remover(".container-mensagem");
 
-    letrasErradas.innerHTML = '';
- }
+  for (let p of forca) p.style.display = "none";
+}
+
+function remover(sel) {
+  const e = document.querySelector(sel);
+  if (e) e.remove();
+}

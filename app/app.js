@@ -28,3 +28,18 @@ function abrirTimer() {
 function abrirJogo(nome) {
   window.location.href = `games/${nome}/index.html`;
 }
+
+
+
+
+
+
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("sw.js")
+      .then(() => console.log("PWA ativo"))
+      .catch(err => console.error("Erro no SW:", err));
+  });
+}

@@ -601,3 +601,13 @@ document.querySelector('.btn-cadastrar-palavra').addEventListener("click", () =>
   divMensagemErro.classList.remove('active');
   document.querySelector('.input-palavra').value = '';
 })
+
+
+
+
+
+
+
+function voltarMenu(){
+  window.location.href = "../../index.html";
+}

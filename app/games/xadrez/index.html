@@ -1,69 +1,173 @@
-<head></head>
-	<meta charset="UTF-8">
-	<title>Xadrez</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xadrez Fácil</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body onload="inicia_jogo();">
-<div id="fundo"></div>
-<div id="escolhecor-inicio" class="escolhe" >
-	<div onclick="escolhecor_incio('branco');">&#9812;</div>
-   	<div onclick="escolhecor_incio('preto');">&#9818;</div>
-</div>
-<div id="escolhebranco" class="escolhe">
-	<div onclick="escolhe('rainha','branco');">&#9813;</div>
-    <div onclick="escolhe('torre','branco');">&#9814;</div>
-    <div onclick="escolhe('cavalo','branco');">&#9816;</div>
-    <div onclick="escolhe('bispo','branco');">&#9815;</div>
-</div>
-<div id="escolhepreto" class="escolhe">
-	<div onclick="escolhe('rainha','preto');">&#9819;</div>
-    <div onclick="escolhe('torre','preto');">&#9820;</div>
-    <div onclick="escolhe('cavalo','preto');">&#9822;</div>
-    <div onclick="escolhe('bispo','preto');">&#9821;</div>
+<body>
+
+<!-- =========================
+     MODAL DE FIM DE JOGO
+========================= -->
+<div id="gameOverModal" class="modal">
+    <div class="modal-content">
+        <h2><i class="fas fa-trophy"></i> Fim de Jogo!</h2>
+        <div id="winnerMessage" style="font-size: 24px; margin: 20px 0; color: #6b3f00;"></div>
+        <div class="modal-buttons">
+            <button id="restartBtn" class="btn-restart">
+                <i class="fas fa-redo"></i> Novo Jogo
+            </button>
+        </div>
+    </div>
 </div>
 
-<div id="tabuleiro">
-<div id="t11" onclick="seleciona(1,1);"></div>	<div id="t12" onclick="seleciona(1,2);"></div>
-<div id="t13" onclick="seleciona(1,3);"></div>	<div id="t14" onclick="seleciona(1,4);"></div>
-<div id="t15" onclick="seleciona(1,5);"></div>	<div id="t16" onclick="seleciona(1,6);"></div>
-<div id="t17" onclick="seleciona(1,7);"></div>	<div id="t18" onclick="seleciona(1,8);"></div>
+<!-- =========================
+     MODAL DE PROMOÇÃO
+========================= -->
+<div id="promotionModal" class="modal">
+    <div class="modal-content">
+        <h2><i class="fas fa-chess-queen"></i> Promover Peão</h2>
+        <p style="margin: 15px 0; color: #5d4037;">Escolha uma peça para promover:</p>
+        <div class="promotion-options">
+            <button class="promotion-choice" data-piece="q">
+                <span class="promotion-icon">♕</span>
+                <span class="promotion-label">Rainha</span>
+            </button>
+            <button class="promotion-choice" data-piece="r">
+                <span class="promotion-icon">♖</span>
+                <span class="promotion-label">Torre</span>
+            </button>
+            <button class="promotion-choice" data-piece="b">
+                <span class="promotion-icon">♗</span>
+                <span class="promotion-label">Bispo</span>
+            </button>
+            <button class="promotion-choice" data-piece="n">
+                <span class="promotion-icon">♘</span>
+                <span class="promotion-label">Cavalo</span>
+            </button>
+        </div>
+    </div>
+</div>
 
-<div id="t21" onclick="seleciona(2,1);"></div>	<div id="t22" onclick="seleciona(2,2);"></div>
-<div id="t23" onclick="seleciona(2,3);"></div>	<div id="t24" onclick="seleciona(2,4);"></div>
-<div id="t25" onclick="seleciona(2,5);"></div>	<div id="t26" onclick="seleciona(2,6);"></div>
-<div id="t27" onclick="seleciona(2,7);"></div>	<div id="t28" onclick="seleciona(2,8);"></div>
+<!-- =========================
+     CONTAINER PRINCIPAL
+========================= -->
+<div class="container">
 
-<div id="t31" onclick="seleciona(3,1);"></div>	<div id="t32" onclick="seleciona(3,2);"></div>
-<div id="t33" onclick="seleciona(3,3);"></div>	<div id="t34" onclick="seleciona(3,4);"></div>
-<div id="t35" onclick="seleciona(3,5);"></div>	<div id="t36" onclick="seleciona(3,6);"></div>
-<div id="t37" onclick="seleciona(3,7);"></div>	<div id="t38" onclick="seleciona(3,8);"></div>
+    <!-- =========================
+         HEADER
+    ========================= -->
+    <header class="game-header">
 
-<div id="t41" onclick="seleciona(4,1);"></div>	<div id="t42" onclick="seleciona(4,2);"></div>
-<div id="t43" onclick="seleciona(4,3);"></div>	<div id="t44" onclick="seleciona(4,4);"></div>
-<div id="t45" onclick="seleciona(4,5);"></div>	<div id="t46" onclick="seleciona(4,6);"></div>
-<div id="t47" onclick="seleciona(4,7);"></div>	<div id="t48" onclick="seleciona(4,8);"></div>
+        <!-- Voltar -->
+        <div class="header-left">
+            <a href="../../index.html" class="btn-cartoon">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar ao Menu</span>
+            </a>
+        </div>
 
-<div id="t51" onclick="seleciona(5,1);"></div>	<div id="t52" onclick="seleciona(5,2);"></div>
-<div id="t53" onclick="seleciona(5,3);"></div>	<div id="t54" onclick="seleciona(5,4);"></div>
-<div id="t55" onclick="seleciona(5,5);"></div>	<div id="t56" onclick="seleciona(5,6);"></div>
-<div id="t57" onclick="seleciona(5,7);"></div>	<div id="t58" onclick="seleciona(5,8);"></div>
+        <!-- Título -->
+        <div class="game-title">
+            <h1>
+                <i class="fas fa-chess"></i>
+                Xadrez Fácil
+            </h1>
+            <p class="subtitle">Aprenda enquanto joga!</p>
+        </div>
 
-<div id="t61" onclick="seleciona(6,1);"></div>	<div id="t62" onclick="seleciona(6,2);"></div>
-<div id="t63" onclick="seleciona(6,3);"></div>	<div id="t64" onclick="seleciona(6,4);"></div>
-<div id="t65" onclick="seleciona(6,5);"></div>	<div id="t66" onclick="seleciona(6,6);"></div>
-<div id="t67" onclick="seleciona(6,7);"></div>	<div id="t68" onclick="seleciona(6,8);"></div>
+        <!-- Modo de jogo -->
+        <div class="game-mode">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="human">
+                    <i class="fas fa-user"></i> Jogador
+                </button>
+                <button class="mode-btn" data-mode="aila">
+                    <i class="fas fa-robot"></i> A.I.L.A
+                </button>
+            </div>
+        </div>
 
-<div id="t71" onclick="seleciona(7,1);"></div>	<div id="t72" onclick="seleciona(7,2);"></div>
-<div id="t73" onclick="seleciona(7,3);"></div>	<div id="t74" onclick="seleciona(7,4);"></div>
-<div id="t75" onclick="seleciona(7,5);"></div>	<div id="t76" onclick="seleciona(7,6);"></div>
-<div id="t77" onclick="seleciona(7,7);"></div>	<div id="t78" onclick="seleciona(7,8);"></div>
+    </header>
 
-<div id="t81" onclick="seleciona(8,1);"></div>	<div id="t82" onclick="seleciona(8,2);"></div>
-<div id="t83" onclick="seleciona(8,3);"></div>	<div id="t84" onclick="seleciona(8,4);"></div>
-<div id="t85" onclick="seleciona(8,5);"></div>	<div id="t86" onclick="seleciona(8,6);"></div>
-<div id="t87" onclick="seleciona(8,7);"></div>	<div id="t88" onclick="seleciona(8,8);"></div>
+    <!-- =========================
+         STATUS DOS JOGADORES
+    ========================= -->
+    <div class="status-panel">
+
+        <!-- JOGADOR HUMANO -->
+        <div class="player-status-card active" id="whiteStatusCard">
+            <div class="status-card-header">
+                <div class="status-color white"></div>
+                <div class="status-card-info">
+                    <h3>Você (Brancas)</h3>
+                    <p class="status-card-subtitle">Jogador</p>
+                </div>
+                <div class="status-indicator-top" id="whiteStatusTop">Sua vez!</div>
+            </div>
+
+            <div class="status-captures">
+                <div class="captures-title-top">
+                    <i class="fas fa-trophy"></i> Capturadas:
+                </div>
+                <div id="whiteCapturesTop" class="captures-list-top">
+                    <span class="empty-captures-top">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- A.I.L.A -->
+        <div class="player-status-card" id="blackStatusCard">
+            <div class="status-card-header">
+                <div class="status-color black"></div>
+                <div class="status-card-info">
+                    <h3 id="blackPlayerNameTop">A.I.L.A</h3>
+                    <p class="status-card-subtitle" id="blackPlayerTypeTop">Inteligência Artificial</p>
+                </div>
+                <div class="status-indicator-top" id="blackStatusTop">Aguardando...</div>
+            </div>
+
+            <div class="status-captures">
+                <div class="captures-title-top">
+                    <i class="fas fa-trophy"></i> Capturadas:
+                </div>
+                <div id="blackCapturesTop" class="captures-list-top">
+                    <span class="empty-captures-top">-</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================
+         TABULEIRO
+    ========================= -->
+    <div class="main-panel">
+        <div class="chessboard-container">
+            <div class="board-wrapper">
+
+                <div class="board-coordinates horizontal">
+                    <span>A</span><span>B</span><span>C</span><span>D</span>
+                    <span>E</span><span>F</span><span>G</span><span>H</span>
+                </div>
+
+                <div id="chessboard" class="chessboard">
+                    <!-- Casas geradas via JS -->
+                </div>
+
+                <div class="board-coordinates horizontal">
+                    <span>A</span><span>B</span><span>C</span><span>D</span>
+                    <span>E</span><span>F</span><span>G</span><span>H</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
