@@ -1,22 +1,25 @@
 {
-  "name": "Aplicativo Certa Terapêutico",
-  "short_name": "Certa",
+  "name": "Jogos Terapêuticos",
+  "short_name": "Jogos Terapia",
+  "description": "Aplicativo de jogos terapêuticos para apoio clínico e educacional.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#c8a36a",
-  "theme_color": "#1b5e20",
   "orientation": "portrait",
+  "background_color": "#1b5e20",
+  "theme_color": "#1b5e20",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "assets/imagens/pwa/certa-a-png-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "assets/imagens/pwa/certa-a-png-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

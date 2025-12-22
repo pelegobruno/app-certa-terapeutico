@@ -1,13 +1,11 @@
-const CACHE_NAME = "certa-v3"; // 🔴 MUDE ESSE NÚMERO SEMPRE QUE ATUALIZAR
+const CACHE_NAME = "jogos-terapeuticos-v1";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./app.css",
   "./app.js",
-  "./manifest.json",
-  "./ativos/imagens/certa-a-png.png",
-  "./ativos/fontes/Turtles.otf"
+  "./manifest.json"
 ];
 
 self.addEventListener("install", event => {
@@ -34,6 +32,8 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(res => res || fetch(event.request))
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });
