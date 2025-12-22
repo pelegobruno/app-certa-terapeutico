@@ -3,7 +3,9 @@
 ========================= */
 @font-face {
   font-family: 'TMNT';
-  src: url('assets/fontes/turtles/Turtles.otf') format('opentype');
+  src: url('assets/fonts/turtles/Turtles.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* =========================

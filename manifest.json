@@ -1,10 +1,12 @@
 {
-  "name": "App Terapêutico Certa",
+  "name": "Aplicativo Certa Terapêutico",
   "short_name": "Certa",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#c8a36a",
   "theme_color": "#1b5e20",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icons/icon-192.png",
