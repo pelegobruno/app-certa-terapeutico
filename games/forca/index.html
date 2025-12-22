@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Jogo da Forca</title>
+</head>
+
+<body>
+
+<header>
+    <h1>
+        <img src="imagens/Logo.png" alt="Logo">
+    </h1>
+</header>
+
+<main>
+
+    <!-- MENU DA FORCA -->
+    <div id="tela-opcoes">
+        <div id="botoes-iniciais-container">
+            <button id="botao-comecar" class="botao-azul" onclick="Tela(1)">
+                Começar a jogar
+            </button>
+
+            <button id="botao-adicionar" class="botao-claro" onclick="Tela(2)">
+                Adicionar nova palavra
+            </button>
+        </div>
+    </div>
+
+    <!-- ADICIONAR PALAVRA -->
+    <div id="tela-adicionar">
+
+        <textarea id="adicionar-area" placeholder="Digite a palavra" maxlength="20"></textarea>
+        <textarea id="adicionar-area-dica" placeholder="Digite a dica" maxlength="20"></textarea>
+
+        <div id="aviso">
+            <p>
+                <img src="imagens/exclamaçao.png">
+                Máximo de 20 caracteres, somente letras maiúsculas e sem acentos.
+            </p>
+        </div>
+
+        <div id="botoes-adicionar-container">
+            <button class="botao-azul" onclick="Tela(3)">Salvar e começar</button>
+            <button class="botao-claro" onclick="Tela(4)">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- JOGO -->
+    <div id="tela-jogo">
+
+        <!-- VOLTAR AO MENU DE JOGOS -->
+        <div id="botao-voltar-menu">
+            <button class="botao-claro" onclick="window.location.href='../../index.html'">
+                ← menu de jogos
+            </button>
+        </div>
+
+        <!-- FORCA (ORIGINAL) -->
+        <div id="forca">
+            <div id="corpo-braco-direito" class="elementos-da-forca"><img src="imagens/forca/9.png"></div>
+            <div id="corpo-braco-esquerdo" class="elementos-da-forca"><img src="imagens/forca/8.png"></div>
+            <div id="corpo-pe-direito" class="elementos-da-forca"><img src="imagens/forca/7.png"></div>
+            <div id="corpo-pe-esquerdo" class="elementos-da-forca"><img src="imagens/forca/6.png"></div>
+            <div id="corpo-tronco" class="elementos-da-forca"><img src="imagens/forca/5.png"></div>
+            <div id="corpo-cabeca" class="elementos-da-forca"><img src="imagens/forca/4.png"></div>
+            <div id="forca-corda" class="elementos-da-forca"><img src="imagens/forca/3.png"></div>
+            <div id="forca-suporte" class="elementos-da-forca"><img src="imagens/forca/2.png"></div>
+            <div id="forca-aresta" class="elementos-da-forca"><img src="imagens/forca/1.png"></div>
+            <div id="forca-base" class="elementos-da-forca"><img src="imagens/forca/0.png"></div>
+        </div>
+
+        <div id="palavras"></div>
+        <div id="palavras-incorretas"></div>
+
+        <div id="botoes-jogo-container">
+            <button class="botao-azul" onclick="Tela(5)">Novo jogo</button>
+            <button class="botao-claro" onclick="Tela(6)">Desistir</button>
+        </div>
+
+    </div>
+
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
