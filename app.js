@@ -30,47 +30,46 @@ function mostrarTela(id) {
 }
 
 /* =========================
-   SPLASH → MENU (CONTROLE ÚNICO)
+   INICIALIZAÇÃO DO APP
 ========================= */
 window.addEventListener("load", () => {
   const splash = document.getElementById("splashApp");
 
-  // Mostra splash
-  mostrarTela("splashApp");
+  /* === SPLASH === */
+  if (splash) {
+    mostrarTela("splashApp");
 
-  // Após o tempo configurado, oculta splash e mostra menu
-  setTimeout(() => {
-    splash?.classList.add("oculto"); // anima fade-out (CSS)
-    
-    // pequeno delay para finalizar fade
     setTimeout(() => {
-      mostrarTela("menuApp");
-    }, 600);
-  }, TEMPO_SPLASH);
+      splash.classList.add("oculto");
+
+      setTimeout(() => {
+        mostrarTela("menuApp");
+      }, 600);
+    }, TEMPO_SPLASH);
+  } else {
+    // fallback se splash não existir
+    mostrarTela("menuApp");
+  }
+
+  /* === SERVICE WORKER (PWA) === */
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch(err => console.error("Erro no Service Worker:", err));
+  }
 });
 
 /* =========================
-   NAVEGAÇÃO ENTRE TELAS / JOGOS
+   NAVEGAÇÃO ENTRE JOGOS
 ========================= */
 
 // Abre o TIMER (menu → timer)
 function abrirTimer() {
-  window.location.href = "games/timer/index.html";
+  window.location.href = "./games/timer/index.html";
 }
 
 // Abre qualquer jogo pelo nome da pasta
 function abrirJogo(nome) {
-  window.location.href = `games/${nome}/index.html`;
-}
-
-/* =========================
-   SERVICE WORKER (PWA)
-========================= */
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("sw.js")
-      .then(() => console.log("PWA ativo"))
-      .catch(err => console.error("Erro no SW:", err));
-  });
+  window.location.href = `./games/${nome}/index.html`;
 }
