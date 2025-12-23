@@ -5,27 +5,20 @@
   <title>Jogos Terapêuticos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- BASE PARA GITHUB PAGES -->
-  <base href="./">
-
   <!-- CSS GLOBAL -->
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="./app.css">
 
   <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#1b5e20">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 
-  <!-- =========================
-       SPLASH DO APP
-  ========================= -->
+  <!-- SPLASH -->
   <section id="splashApp" class="tela ativa">
-
-    <img src="assets/imagens/certa-a-png.png">
-
+    <img src="./assets/imagens/certa-a-png.png" alt="Logo">
 
     <div class="splash-dev">
       Desenvolvido e agradecimentos por
@@ -36,54 +29,23 @@
     </div>
   </section>
 
-  <!-- =========================
-       MENU PRINCIPAL
-  ========================= -->
+  <!-- MENU -->
   <section id="menuApp" class="tela">
     <h1 class="titulo">Jogos Terapêuticos</h1>
 
     <div class="grid-jogos">
 
-      <!-- TIMER TERAPÊUTICO -->
-      <div class="card" onclick="abrirJogo('timer')">
-        ⏱️
-        <span>Timer Terapêutico</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('cobra')">
-        🐍
-        <span>Jogo da Cobra</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('memoria')">
-        🧠
-        <span>Jogo da Memória</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('velha')">
-        ❌⭕
-        <span>Jogo da Velha</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('caça-palavras')">
-        🔎
-        <span>Caça-Palavras</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('forca')">
-        🔤
-        <span>Jogo da Forca</span>
-      </div>
-
-      <div class="card" onclick="abrirJogo('xadrez')">
-        ♟️
-        <span>Xadrez</span>
-      </div>
+      <div class="card" onclick="abrirJogo('timer')">⏱️<span>Timer Terapêutico</span></div>
+      <div class="card" onclick="abrirJogo('cobra')">🐍<span>Jogo da Cobra</span></div>
+      <div class="card" onclick="abrirJogo('memoria')">🧠<span>Jogo da Memória</span></div>
+      <div class="card" onclick="abrirJogo('velha')">❌⭕<span>Jogo da Velha</span></div>
+      <div class="card" onclick="abrirJogo('caça-palavras')">🔎<span>Caça-Palavras</span></div>
+      <div class="card" onclick="abrirJogo('forca')">🔤<span>Jogo da Forca</span></div>
+      <div class="card" onclick="abrirJogo('xadrez')">♟️<span>Xadrez</span></div>
 
     </div>
   </section>
 
-  <!-- JS GLOBAL -->
-  <script src="app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
