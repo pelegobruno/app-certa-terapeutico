@@ -3,7 +3,16 @@
 ========================= */
 @font-face {
   font-family: 'TMNT';
-  src: url('./assets/fonts/turtles/Turtles.woff2') format('woff2');
+  src: url('./assets/fontes/turtles/Turtles.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Se você tiver também o arquivo WOFF2, adicione assim: */
+@font-face {
+  font-family: 'TMNT';
+  src: url('./assets/fontes/turtles/Turtles.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -11,13 +20,20 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('.assets/fonts/montserrat-semibold.ttf') format('truetype');
+  src: url('./assets/fontes/montserrat-semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Pacifico';
-  src: url('assets/fonts/pacifico-regular.ttf');
+  src: url('./assets/fontes/pacifico-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
 
 /* =========================
    RESET
