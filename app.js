@@ -6,14 +6,7 @@ const telas = ["splashApp", "menuApp"];
 /* =========================
    CONFIGURAÇÃO DO SPLASH
 ========================= */
-/*
-  ⏱️ CONTROLE AQUI O TEMPO DO SPLASH (em milissegundos)
 
-  2000 = rápido
-  3000 = padrão
-  4000 = leitura confortável
-  6000 = bem calmo (crianças)
-*/
 const TEMPO_SPLASH = 6000;
 
 /* =========================

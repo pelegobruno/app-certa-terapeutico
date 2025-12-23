@@ -5,7 +5,9 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./app.css",
   "./app.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./assets/imagens/certa-a-png.png",
+  "./assets/fonts/turtles/Turtles.woff2"
 ];
 
 self.addEventListener("install", event => {
