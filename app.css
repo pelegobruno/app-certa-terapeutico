@@ -46,7 +46,7 @@ body {
   margin: 0;
   background: #c8a36a;
   font-family: Arial, sans-serif;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* =========================
